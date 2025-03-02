@@ -71,8 +71,4 @@ jobs:
           -H "Accept: application/vnd.github.everest-preview+json" \
           -H "Authorization: token ${TOKEN_KIDDIN9}" \
           -d '{"event_type": "'"${target}"'", "client_payload": {"target": "'"${target}"'"}}'
-        else
-          echo "错误：目标设备'${target}'不被支持。"
-          echo "支持的目标设备：${allowed_targets[@]}"
-          exit 1
         fi
