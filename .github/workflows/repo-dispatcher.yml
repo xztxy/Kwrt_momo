@@ -66,7 +66,12 @@ jobs:
         # 定义允许的目标设备列表
         allowed_targets=("x86_64" "x86_generic" "rockchip_armv8" "bcm27xx_bcm2712" "bcm27xx_bcm2711" "bcm27xx_bcm2710" "bcm27xx_bcm2709" "bcm27xx_bcm2708" "armsr_armv8" "mediatek_mt7622" "mediatek_filogic" "qualcomax_ipq50xx" "ramips_mt7621" "ramips_mt7620" "ramips_mt76x8" "qualcomax_ipq807x" "ipq40xx_generic" "ipq806x_generic" "amlogic_meson8b" "qualcomax_ipq60xx" "mvebu_cortexa9" "bcm53xx" "sunxi_cortexa53" "sunxi_cortexa7" "ath79_nand")
         # 获取用户输入的目标设备，并转换为小写
-        target=$(echo "${GITHUB_EVENT_INPUT_PARAM}" | tr '[:upper:]' '[:lower:]')
+        target=$(echo "${{ github.event.inputs.param }}" | tr '[:upper:]' '[:lower:]')
+        # 检查目标设备是否为空
+        if [[ -z "${target}" ]]; then
+          echo "错误：未指定目标设备。"
+          exit 1
+        fi
         # 检查目标设备是否在允许列表中
         if [[ " ${allowed_targets[@]} " =~ " ${target} " ]]; then
           # 发出Dispatch事件，触发Openwrt-AutoBuild.yml为该设备编译
@@ -81,4 +86,3 @@ jobs:
           echo "支持的目标设备：${allowed_targets[@]}"
           exit 1
         fi
-
