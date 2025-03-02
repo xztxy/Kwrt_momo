@@ -18,7 +18,7 @@ on:
     inputs:
       param:
         description: 'parameter'
-        required: true
+        required: false
         default: ''
 
 env:
