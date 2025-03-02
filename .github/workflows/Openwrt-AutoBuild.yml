@@ -10,7 +10,6 @@ name: Build OpenWrt
 
 on:
   repository_dispatch:
-    types: [x86_64]
 
 env:
   REPO_TOKEN: ${{ secrets.TOKEN_KIDDIN9 }}
