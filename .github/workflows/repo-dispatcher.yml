@@ -18,8 +18,8 @@ on:
     inputs:
       param:
         description: 'parameter'
-        required: true
-        default: 'x86_64'
+        required: false
+        default: ''
 
 env:
   TOKEN_KIDDIN9: ${{ secrets.TOKEN_KIDDIN9 }}
@@ -42,8 +42,8 @@ jobs:
     - name: Load Settings.ini
       run: |
         source "${GITHUB_WORKSPACE}/devices/common/settings.ini"
-        if [ -n "${{ github.event.inputs.param }}" ] && [ -f "devices/${{ github.event.inputs.param }}/settings.ini" ]; then
-          source "${GITHUB_WORKSPACE}/devices/${{ github.event.inputs.param }}/settings.ini"
+        if [ -f "devices/${{matrix.target}}/settings.ini" ]; then
+          source "${GITHUB_WORKSPACE}/devices/${{matrix.target}}/settings.ini"
         fi
         echo "REPO_URL=${REPO_URL}" >> $GITHUB_ENV
         echo "REPO_BRANCH=${REPO_BRANCH}" >> $GITHUB_ENV
