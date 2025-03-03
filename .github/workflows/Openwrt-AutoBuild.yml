@@ -273,6 +273,11 @@ jobs:
         rm -rf staging_dir/toolchain-*/bin/*openwrt-linux-musl-lto-dump
         rm -rf staging_dir/toolchain-*/initial
         df -hT
+    - name: Debug
+      run: |
+        echo "UPLOAD_FIRMWARE_FOR_RELEASE: ${{ env.UPLOAD_FIRMWARE_FOR_RELEASE }}"
+        echo "REPO_TOKEN: ${{ env.REPO_TOKEN }}"
+        ls -R openwrt/bin/targets
 
     - name: Organize files
       id: organize
